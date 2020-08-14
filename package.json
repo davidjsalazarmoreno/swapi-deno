@@ -1,0 +1,8 @@
+{
+  "name": "swapi-deno",
+  "version": "0.0.1",
+  "description": "A SWAPI clone but in Deno and Svelte",
+  "main": "index.js",
+  "author": "David Salazar <davidjsalazarmoreno@gmail.com>",
+  "license": "MIT"
+}
