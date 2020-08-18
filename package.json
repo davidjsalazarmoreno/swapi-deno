@@ -4,5 +4,8 @@
   "description": "A SWAPI clone but in Deno and Svelte",
   "main": "index.js",
   "author": "David Salazar <davidjsalazarmoreno@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "deno run --allow-net server.ts"
+  }
 }
