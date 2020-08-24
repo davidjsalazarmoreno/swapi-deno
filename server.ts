@@ -1,41 +1,12 @@
-import { Application, Database } from "./deps.ts";
-import { Character } from "./models/character.ts";
-import { Film } from "./models/film.ts";
-import { Planet } from "./models/planet.ts";
-import { Specie } from "./models/specie.ts";
-import { Starship } from "./models/starship.ts";
-import { Vehicle } from "./models/vehicle.ts";
+import {
+  Application,
+} from "./deps.ts";
 import { router } from "./router.ts";
+import { createTables, populateTables } from "./database/db.ts";
 
-const db = new Database("sqlite3", {
-  filepath: "./database.sqlite",
-});
-
-db.link([Character, Film, Planet, Specie, Starship, Vehicle]);
-
-Character.hasMany(Film);
-Character.hasMany(Specie);
-Character.hasMany(Starship);
-Character.hasMany(Vehicle);
-
-Film.hasMany(Character);
-Film.hasMany(Planet);
-Film.hasMany(Starship);
-Film.hasMany(Vehicle);
-
-Starship.hasMany(Film);
-Starship.hasMany(Character);
-
-Vehicle.hasMany(Film);
-Vehicle.hasMany(Character);
-
-Specie.hasMany(Film);
-Specie.hasMany(Character);
-
-Planet.hasMany(Film);
-Planet.hasMany(Character);
-
-await db.sync({ drop: true });
+await createTables();
+await populateTables();
+console.log("A fresh database was created and populated.\n");
 
 const app = new Application();
 
