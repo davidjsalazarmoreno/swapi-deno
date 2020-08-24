@@ -5,13 +5,25 @@ import { films } from "./fixtures/films.ts";
 
 export const db = new DB("database.sqlite");
 
+function prepareValues(values: any[]) {
+  return values.map((value) => {
+    if (typeof value === "string") {
+      return `'${
+        value.replace(/(\r\n|\n|\r)/gm, "<br>").replace(/'/g, "&quot;")
+      }'`;
+    } else {
+      return "'null'";
+    }
+  });
+}
+
 export async function createTables() {
   await db.query(`/* SQL */
     CREATE TABLE IF NOT EXISTS films (
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       director STRING,
       episode_id INTEGER,
-      opening_craw STRING,
+      opening_crawl STRING,
       producer STRING,
       release_date DATE,
       title STRING,
@@ -123,18 +135,18 @@ export async function createTables() {
 
 export async function populateTables() {
   films.forEach(async (fixture) => {
-    console.log(`/* SQL */
-    INSERT INTO TABLE ${fixture.table} (${Object.keys(fixture.fields).join(",")}) 
-    values (
-        ${Object.values(fixture.fields).join(",")}
-    )
-`)
-  
-    await db.query(`/* SQL */
-            INSERT INTO TABLE ${fixture.table} (${Object.keys(fixture.fields).join(",")}) 
-            values (
-                ${Object.values(fixture.fields).join(",")}
-            )
-        `);
+    const { table, fields } = fixture;
+    const columns = Object.keys(fields);
+    const values = Object.values(fields);
+    const query = `/* SQL */
+      INSERT INTO ${table} (
+        ${columns.join(",")}
+      ) 
+      VALUES (
+          ${prepareValues(values).join(",")}
+      );
+    `;
+
+    await db.query(query);
   });
 }
