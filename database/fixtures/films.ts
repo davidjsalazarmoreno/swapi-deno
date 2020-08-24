@@ -52,7 +52,6 @@ export const films = [
     "fields": {
       "producer": "Rick McCallum",
       "title": "Attack of the Clones",
-      "created": "2014-12-20T10:57:57.886Z",
       "episode_id": 2,
       "director": "George Lucas",
       "release_date": "2002-05-16",
