@@ -6,6 +6,7 @@
   "author": "David Salazar <davidjsalazarmoreno@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "deno run --allow-net --allow-read --allow-write server.ts"
+    "start": "rm database.sqlite; deno run --allow-net --allow-read --allow-write server.ts",
+    "watch": "denon run --allow-net --allow-read --allow-write server.ts"
   }
 }
