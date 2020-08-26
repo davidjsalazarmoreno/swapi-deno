@@ -134,7 +134,60 @@ export async function createTables() {
 `);
 }
 
+export async function createRelationsTables() {
+  /**
+   * Films relations
+   */
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS filmsRelations (
+      starshipId INTEGER,
+      vehicleId INTEGER,
+      planetId INTEGER,
+      characterId INTEGER,
+      speciesId INTEGER
+    );
+  `);
+
+  /**
+   * Characters/Species
+   */
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS charactersSpecies (
+      characterId INTEGER, 
+      specieId INTEGER
+    );
+  `);
+
+  /**
+   * Starships/Characters
+   */
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS pilots (
+      starshipId INTEGER, 
+      characterId INTEGER
+    );
+  `);
+}
+
 export async function populateTables() {
+  fixtures.forEach(async (fixture) => {
+    const { table, fields } = fixture;
+    const columns = Object.keys(fields);
+    const values = Object.values(fields);
+    const query = `/* SQL */
+      INSERT INTO ${table} (
+        ${columns.join(",")}
+      ) 
+      VALUES (
+          ${prepareValues(values).join(",")}
+      );
+    `;
+
+    await db.query(query);
+  });
+}
+
+export async function populateRelations() {
   fixtures.forEach(async (fixture) => {
     const { table, fields } = fixture;
     const columns = Object.keys(fields);

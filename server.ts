@@ -2,9 +2,14 @@ import {
   Application,
 } from "./deps.ts";
 import { router } from "./router.ts";
-import { createTables, populateTables } from "./database/db.ts";
+import {
+  createTables,
+  populateTables,
+  createRelationsTables,
+} from "./database/db.ts";
 
 await createTables();
+await createRelationsTables();
 await populateTables();
 console.log("A fresh database was created and populated.\n");
 
