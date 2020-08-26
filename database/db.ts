@@ -1,11 +1,6 @@
 import { escapeHtml } from "../utils/escape-html.ts";
 import { DB } from "./../deps.ts";
-import { characters } from "./fixtures/characters.ts";
-import { films } from "./fixtures/films.ts";
-import { planets } from "./fixtures/planets.ts";
-import { species } from "./fixtures/species.ts";
-import { starships } from "./fixtures/starships.ts";
-import { vehicles } from "./fixtures/vehicles.ts";
+import { fixtures } from "./fixtures/fixtures.ts";
 
 export const db = new DB("database.sqlite");
 
@@ -140,15 +135,6 @@ export async function createTables() {
 }
 
 export async function populateTables() {
-  const fixtures = [
-    ...characters,
-    ...films,
-    ...planets,
-    ...species,
-    ...starships,
-    ...vehicles,
-  ];
-
   fixtures.forEach(async (fixture) => {
     const { table, fields } = fixture;
     const columns = Object.keys(fields);
