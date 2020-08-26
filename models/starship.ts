@@ -1,3 +1,3 @@
 export class Starship {
-  static table = "starship";
+  static table = "starships";
 }

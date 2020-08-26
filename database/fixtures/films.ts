@@ -1,3 +1,6 @@
+/**
+ * https://github.com/Juriy/swapi/blob/master/resources/fixtures/films.json
+ */
 export const films = [
   {
     "fields": {
