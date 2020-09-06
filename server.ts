@@ -1,16 +1,19 @@
 import {
-  Application,
-} from "./deps.ts";
-import { router } from "./router.ts";
-import {
-  createTables,
-  populateTables,
   createRelationsTables,
+  createTables,
+  populateRelations,
+  populateTables,
 } from "./database/db.ts";
+import { Application } from "./deps.ts";
+import { router } from "./router.ts";
 
+/**
+ * TODO: Move to a separate script process
+ */
 await createTables();
 await createRelationsTables();
 await populateTables();
+await populateRelations();
 console.log("A fresh database was created and populated.\n");
 
 const app = new Application();
