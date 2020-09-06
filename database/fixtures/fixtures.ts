@@ -6,7 +6,7 @@ import { starships } from "./starships.ts";
 import { transports } from "./transports.ts";
 import { vehicles } from "./vehicles.ts";
 
-interface Fixtures {
+export interface Fixtures {
   fields: { [key: string]: number[] | string | number | null };
   model: string;
   pk: number;
