@@ -1,8 +1,30 @@
 import { escapeHtml } from "../utils/escape-html.ts";
 import { DB } from "./../deps.ts";
 import { fixtures } from "./fixtures/fixtures.ts";
+import { starships } from "./fixtures/starships.ts";
+
+export const tableNames: { [key: string]: string } = {
+  film: "films",
+  people: "people",
+  planet: "planets",
+  species: "species",
+  starship: "starships",
+  transport: "transports",
+  vehicle: "vehicles",
+};
 
 export const db = new DB("database.sqlite");
+
+function prepareFields(entries: any) {
+  const keyToIgnore = [
+    "pilots",
+    "characters",
+    ...Object.values(tableNames),
+  ];
+  return Object.fromEntries(entries.filter((entry: string) => {
+    return !keyToIgnore.includes(entry[0]);
+  }));
+}
 
 function prepareValues(values: any[]) {
   return values.map((value) => {
@@ -22,18 +44,20 @@ export async function createTables() {
   await db.query(`/* SQL */
     CREATE TABLE IF NOT EXISTS films (
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
-      director STRING,
+      director TEXT,
       episode_id INTEGER,
-      opening_crawl STRING,
-      producer STRING,
+      opening_crawl TEXT,
+      producer TEXT,
       release_date DATE,
-      title STRING,
-      url STRING
+      title TEXT,
+      url TEXT,
+      edited TIMESTAMP,
+      created TIMESTAMP
     );
   `);
 
   await db.query(`/* SQL */
-    CREATE TABLE IF NOT EXISTS characters (
+    CREATE TABLE IF NOT EXISTS people (
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       birth_year TEXT,
       eye_color TEXT,
@@ -45,7 +69,9 @@ export async function createTables() {
       name TEXT,
       skin_color TEXT,
       url TEXT,
-      film_id INTEGER, 
+      edited TIMESTAMP,
+      created TIMESTAMP,
+      film_id INTEGER,
       FOREIGN KEY (film_id) REFERENCES films(id)
     );
   `);
@@ -63,7 +89,9 @@ export async function createTables() {
       surface_water TEXT,
       terrain TEXT,
       url TEXT,
-      film_id INTEGER, 
+      edited TIMESTAMP,
+      created TIMESTAMP,
+      film_id INTEGER,
       FOREIGN KEY (film_id) REFERENCES films(id)
     );
   `);
@@ -82,7 +110,9 @@ export async function createTables() {
       name TEXT,
       skin_colors TEXT,
       url TEXT,
-      film_id INTEGER, 
+      edited TIMESTAMP,
+      created TIMESTAMP,
+      film_id INTEGER,
       FOREIGN KEY (film_id) REFERENCES films(id)
     );
   `);
@@ -112,7 +142,7 @@ export async function createTables() {
   `);
 
   await db.query(`/* SQL */
-    CREATE TABLE IF NOT EXISTS vehicles (
+    CREATE TABLE IF NOT EXISTS transports (
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       cargo_capacity TEXT, 
       consumables TEXT, 
@@ -131,7 +161,14 @@ export async function createTables() {
       film_id INTEGER, 
       FOREIGN KEY (film_id) REFERENCES films(id)
     );
-`);
+  `);
+
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS vehicles (
+      id INTEGER,
+      vehicle_class TEXT
+    );
+  `);
 }
 
 export async function createRelationsTables() {
@@ -171,15 +208,18 @@ export async function createRelationsTables() {
 
 export async function populateTables() {
   fixtures.forEach(async (fixture) => {
-    const { table, fields } = fixture;
+    const { model } = fixture;
+    const fields = prepareFields(Object.entries(fixture.fields));
+    const table = model.split("resources.").join("");
     const columns = Object.keys(fields);
     const values = Object.values(fields);
+
     const query = `/* SQL */
-      INSERT INTO ${table} (
-        ${columns.join(",")}
+      INSERT INTO ${tableNames[table]} (
+        id, ${columns.join(",")}
       ) 
       VALUES (
-          ${prepareValues(values).join(",")}
+          ${fixture.pk}, ${prepareValues(values).join(",")}
       );
     `;
 
@@ -188,19 +228,26 @@ export async function populateTables() {
 }
 
 export async function populateRelations() {
-  fixtures.forEach(async (fixture) => {
-    const { table, fields } = fixture;
-    const columns = Object.keys(fields);
-    const values = Object.values(fields);
+  const queries = starships.filter((startship) =>
+    startship.fields.pilots.length
+  ).flatMap((startship) => {
+    const { pk, fields: { pilots } } = startship;
+
+    return pilots.map((pilot) => [pk, pilot]);
+  });
+
+  console.log(queries);
+
+  queries.forEach(async (values) => {
     const query = `/* SQL */
-      INSERT INTO ${table} (
-        ${columns.join(",")}
-      ) 
-      VALUES (
+      INSERT INTO pilots VALUES
+        (
           ${prepareValues(values).join(",")}
-      );
+        )
+      ;
     `;
 
+    console.log(query);
     await db.query(query);
   });
 }
