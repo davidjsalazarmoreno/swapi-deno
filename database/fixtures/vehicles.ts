@@ -1,236 +1,340 @@
+/**
+ * https://raw.githubusercontent.com/Juriy/swapi/master/resources/fixtures/vehicles.json
+ */
 export const vehicles = [
   {
     "fields": {
       "vehicle_class": "wheeled",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 4,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 6,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 7,
   },
   {
     "fields": {
       "vehicle_class": "starfighter",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 8,
   },
   {
     "fields": {
       "vehicle_class": "airspeeder",
+      "pilots": [
+        1,
+        18,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 14,
   },
   {
     "fields": {
       "vehicle_class": "space/planetary bomber",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 16,
   },
   {
     "fields": {
       "vehicle_class": "assault walker",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 18,
   },
   {
     "fields": {
       "vehicle_class": "walker",
+      "pilots": [
+        13,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 19,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 20,
   },
   {
     "fields": {
       "vehicle_class": "sail barge",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 24,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft cargo skiff",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 25,
   },
   {
     "fields": {
       "vehicle_class": "starfighter",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 26,
   },
   {
     "fields": {
       "vehicle_class": "speeder",
+      "pilots": [
+        1,
+        5,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 30,
   },
   {
     "fields": {
       "vehicle_class": "starfighter",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 33,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 34,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 35,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 36,
   },
   {
     "fields": {
       "vehicle_class": "landing craft",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 37,
   },
   {
     "fields": {
       "vehicle_class": "submarine",
+      "pilots": [
+        10,
+        32,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 38,
   },
   {
     "fields": {
       "vehicle_class": "speeder",
+      "pilots": [
+        44,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 42,
   },
   {
     "fields": {
       "vehicle_class": "repulsorcraft",
+      "pilots": [
+        11,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 44,
   },
   {
     "fields": {
       "vehicle_class": "airspeeder",
+      "pilots": [
+        70,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 45,
   },
   {
     "fields": {
       "vehicle_class": "airspeeder",
+      "pilots": [
+        11,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 46,
   },
   {
     "fields": {
       "vehicle_class": "gunship",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 50,
   },
   {
     "fields": {
       "vehicle_class": "gunship",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 51,
   },
   {
     "fields": {
       "vehicle_class": "walker",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 53,
   },
   {
     "fields": {
       "vehicle_class": "walker",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 54,
   },
   {
     "fields": {
       "vehicle_class": "speeder",
+      "pilots": [
+        67,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 55,
   },
   {
     "fields": {
       "vehicle_class": "transport",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 56,
   },
   {
     "fields": {
       "vehicle_class": "starfighter",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 57,
   },
   {
     "fields": {
       "vehicle_class": "wheeled walker",
+      "pilots": [
+        79,
+      ],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 60,
   },
   {
     "fields": {
       "vehicle_class": "fire suppression ship",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 62,
   },
   {
     "fields": {
       "vehicle_class": "droid starfighter",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 67,
   },
   {
     "fields": {
       "vehicle_class": "airspeeder",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 69,
   },
   {
     "fields": {
       "vehicle_class": "air speeder",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 70,
   },
   {
     "fields": {
       "vehicle_class": "wheeled walker",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 71,
   },
   {
     "fields": {
       "vehicle_class": "droid tank",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 72,
   },
   {
     "fields": {
       "vehicle_class": "airspeeder",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 73,
   },
   {
     "fields": {
       "vehicle_class": "walker",
+      "pilots": [],
     },
-    "table": "vehicles",
+    "model": "resources.vehicle",
+    "pk": 76,
   },
 ];
