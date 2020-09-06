@@ -1,7 +1,11 @@
 import { escapeHtml } from "../utils/escape-html.ts";
-import { DB } from "./../deps.ts";
-import { fixtures } from "./fixtures/fixtures.ts";
+import { DB, titleCase } from "./../deps.ts";
+import { fixtures, Fixtures } from "./fixtures/fixtures.ts";
 import { starships } from "./fixtures/starships.ts";
+
+export interface Mapping {
+  [key: string]: string[];
+}
 
 export const tableNames: { [key: string]: string } = {
   film: "films",
@@ -14,6 +18,10 @@ export const tableNames: { [key: string]: string } = {
 };
 
 export const db = new DB("database.sqlite");
+
+function getTableName(model: string) {
+  return model.split("resources.").join("");
+}
 
 function prepareFields(entries: any) {
   const keyToIgnore = [
@@ -176,30 +184,55 @@ export async function createRelationsTables() {
    * Films relations
    */
   await db.query(`/* SQL */
-    CREATE TABLE IF NOT EXISTS filmsRelations (
-      starshipId INTEGER,
-      vehicleId INTEGER,
-      planetId INTEGER,
-      characterId INTEGER,
+    CREATE TABLE IF NOT EXISTS filmStarships (
+      filmId INTEGER,
+      starshipId INTEGER
+    );
+  `);
+
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS filmVehicles (
+      filmId INTEGER,
+      vehicleId INTEGER
+    );
+  `);
+
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS filmPlanets (
+      filmId INTEGER,
+      planetId INTEGER
+    );
+  `);
+
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS filmCharacters (
+      filmId INTEGER,
+      characterId INTEGER
+    );
+  `);
+
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS filmSpecies (
+      filmId INTEGER,
       speciesId INTEGER
     );
   `);
 
   /**
-   * Characters/Species
+   * species people
    */
   await db.query(`/* SQL */
-    CREATE TABLE IF NOT EXISTS charactersSpecies (
+    CREATE TABLE IF NOT EXISTS speciesPeople (
       characterId INTEGER, 
       specieId INTEGER
     );
   `);
 
   /**
-   * Starships/Characters
+   * starship pilots
    */
   await db.query(`/* SQL */
-    CREATE TABLE IF NOT EXISTS pilots (
+    CREATE TABLE IF NOT EXISTS starshipPilots (
       starshipId INTEGER, 
       characterId INTEGER
     );
@@ -210,7 +243,7 @@ export async function populateTables() {
   fixtures.forEach(async (fixture) => {
     const { model } = fixture;
     const fields = prepareFields(Object.entries(fixture.fields));
-    const table = model.split("resources.").join("");
+    const table = getTableName(model);
     const columns = Object.keys(fields);
     const values = Object.values(fields);
 
@@ -227,24 +260,61 @@ export async function populateTables() {
   });
 }
 
+function onlyRelations(mapping: Mapping) {
+  return (fixture: Fixtures) => {
+    const { model } = fixture;
+    const relationName = mapping[getTableName(model)];
+    const relations = Object.keys(fixture.fields).filter((relation) =>
+      relationName && relationName.includes(relation)
+    );
+
+    return Array.isArray(relations) && relations.length;
+  };
+}
+
+function prepareRelationValues(mapping: Mapping) {
+  return (fixture: Fixtures) => {
+    const { model } = fixture;
+    const tableName = getTableName(model);
+    const relationName = mapping[tableName];
+    const { pk, fields } = fixture;
+    const values = relationName.map((relation) => {
+      const relationTable = tableName + titleCase(relation);
+      return [
+        relationTable,
+        pk,
+        ...fields[relation] as any,
+      ];
+    });
+
+    return values;
+  };
+}
+
 export async function populateRelations() {
-  const queries = starships.filter((startship) =>
-    startship.fields.pilots.length
-  ).flatMap((startship) => {
-    const { pk, fields: { pilots } } = startship;
+  const mapping: { [key: string]: string[] } = {
+    species: ["people"],
+    starship: ["pilots"],
+    film: ["starships", "vehicles", "planets", "characters", "species"],
+  };
+  const queries = fixtures.filter(onlyRelations(mapping)).flatMap(
+    prepareRelationValues(mapping),
+  );
 
-    return pilots.map((pilot) => [pk, pilot]);
-  });
-
-  console.log(queries);
-
-  queries.forEach(async (values) => {
+  queries.forEach(async (data) => {
+    const [relationTable, pk, ...values] = data;
+    if (values.length === 0) {
+      return;
+    }
+    const relationsValue = values.map((value) => {
+      return `
+          (
+            ${pk}, ${value}
+          )
+      `;
+    });
     const query = `/* SQL */
-      INSERT INTO pilots VALUES
-        (
-          ${prepareValues(values).join(",")}
-        )
-      ;
+      INSERT INTO ${relationTable} VALUES ${relationsValue};
     `;
 
     console.log(query);
