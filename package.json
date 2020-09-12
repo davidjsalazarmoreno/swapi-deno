@@ -1,13 +1,18 @@
 {
-	"name": "swapi-deno",
-	"version": "0.0.1",
-	"description": "A SWAPI clone but in Deno and Svelte",
-	"main": "index.js",
-	"author": "David Salazar <davidjsalazarmoreno@gmail.com>",
-	"license": "MIT",
-	"scripts": {
-		"start": "deno run --allow-net --allow-read --allow-write server.ts",
-		"create:db": "rm database.sqlite; deno run --allow-net --allow-read --allow-write prepare-database.ts",
-		"watch": "denon run --allow-net --allow-read --allow-write server.ts"
-	}
+  "name": "swapi-deno",
+  "version": "0.0.1",
+  "description": "A SWAPI clone but in Deno and Svelte",
+  "main": "index.js",
+  "author": "David Salazar <davidjsalazarmoreno@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "deno run --allow-net --allow-read --allow-write server.ts",
+    "create:db": "rm database.sqlite; deno run --allow-net --allow-read --allow-write prepare-database.ts",
+    "watch": "denon run --allow-net --allow-read --allow-write server.ts",
+    "cypress:run": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^5.1.0",
+    "typescript": "^4.0.2"
+  }
 }
