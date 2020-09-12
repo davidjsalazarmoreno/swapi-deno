@@ -45,6 +45,9 @@ export function onlyRelations(mapping: Mapping) {
   };
 }
 
+/**
+ * Todo: unit test
+ */
 export function prepareRelationValues(mapping: Mapping) {
   return (fixture: Fixtures) => {
     const { model } = fixture;
