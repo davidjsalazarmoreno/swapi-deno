@@ -1,18 +1,21 @@
 import { DB } from "../deps.ts";
-import { tableNames } from "./constants.ts";
 import { fixtures } from "./fixtures/fixtures.ts";
 import {
   getTableName,
   onlyRelations,
-  prepareFields,
+  getColumns,
   prepareRelationValues,
-  prepareValues,
+  escapeValues,
 } from "./utils.ts";
+import { Mapping } from "./db.ts";
 
-export async function populateTables(db: DB) {
+export async function populateTables(
+  db: DB,
+  tableNames: { [key: string]: string },
+) {
   fixtures.forEach(async (fixture) => {
     const { model } = fixture;
-    const fields = prepareFields(Object.entries(fixture.fields));
+    const fields = getColumns(Object.entries(fixture.fields));
     const table = getTableName(model);
     const columns = Object.keys(fields);
     const values = Object.values(fields);
@@ -22,7 +25,7 @@ export async function populateTables(db: DB) {
           id, ${columns.join(",")}
         ) 
         VALUES (
-            ${fixture.pk}, ${prepareValues(values).join(",")}
+            ${fixture.pk}, ${escapeValues(values).join(",")}
         );
       `;
 
@@ -30,12 +33,7 @@ export async function populateTables(db: DB) {
   });
 }
 
-export async function populateRelations(db: DB) {
-  const mapping: { [key: string]: string[] } = {
-    species: ["people"],
-    starship: ["pilots"],
-    film: ["starships", "vehicles", "planets", "characters", "species"],
-  };
+export async function populateRelations(db: DB, mapping: Mapping) {
   const queries = fixtures.filter(onlyRelations(mapping)).flatMap(
     prepareRelationValues(mapping),
   );

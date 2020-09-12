@@ -1,4 +1,8 @@
-export { assertEquals } from "https://deno.land/std@0.68.0/testing/asserts.ts";
+export {
+  assertEquals,
+  assertStringContains,
+  assertArrayContains,
+} from "https://deno.land/std@0.68.0/testing/asserts.ts";
 export { titleCase } from "https://deno.land/x/case@v2.1.0/mod.ts";
 export {
   Application,

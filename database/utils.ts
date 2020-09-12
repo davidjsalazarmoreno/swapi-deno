@@ -8,7 +8,7 @@ export function getTableName(model: string) {
   return model.split("resources.").join("");
 }
 
-export function prepareFields(entries: any) {
+export function getColumns(entries: any) {
   const keyToIgnore = [
     "pilots",
     "characters",
@@ -19,7 +19,7 @@ export function prepareFields(entries: any) {
   }));
 }
 
-export function prepareValues(values: any[]) {
+export function escapeValues(values: any[]) {
   return values.map((value) => {
     if (!value) {
       return "null";

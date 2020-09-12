@@ -7,3 +7,9 @@ export const tableNames: { [key: string]: string } = {
   transport: "transports",
   vehicle: "vehicles",
 };
+
+export const relationsMapping: { [key: string]: string[] } = {
+  species: ["people"],
+  starship: ["pilots"],
+  film: ["starships", "vehicles", "planets", "characters", "species"],
+};
