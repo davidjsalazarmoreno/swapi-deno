@@ -54,7 +54,6 @@ export async function populateRelations(db: DB, mapping: Mapping) {
         INSERT INTO ${relationTable} VALUES ${relationsValue};
       `;
 
-    console.log(query);
     await db.query(query);
   });
 }
