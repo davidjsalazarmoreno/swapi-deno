@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe("/api/people", () => {
   it("should get all people", () => {
     cy.request("http://localhost:8000/api/people")
