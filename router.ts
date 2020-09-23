@@ -1,5 +1,5 @@
 import peopleController from "./controllers/people.controller.ts";
-import { Router, RouterContext } from "./deps.ts";
+import { Router } from "./deps.ts";
 
 export const router = new Router();
 
