@@ -1,4 +1,4 @@
-import { Application } from "./deps.ts";
+import { Application, path, send } from "./deps.ts";
 import { router } from "./router.ts";
 
 const app = new Application();
@@ -18,5 +18,12 @@ app.addEventListener("error", (event) => {
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+app.use(async (ctx) => {
+  const root = path.join(Deno.cwd(), "/client/public/");
+  await send(ctx, ctx.request.url.pathname, {
+    root,
+    index: "index.html",
+  });
+});
 
 await app.listen({ port: 8000 });
