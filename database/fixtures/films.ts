@@ -1,18 +1,6 @@
 /**
  * https://github.com/Juriy/swapi/blob/master/resources/fixtures/films.json
  */
-// SELECT
-//     filmSpecies.speciesId
-// FROM
-//     films
-// INNER JOIN
-//     filmSpecies
-// ON
-//     filmSpecies.filmId = 5
-// WHERE
-//     films.id = 5
-// ;
-
 export const films = [
   {
     "fields": {
