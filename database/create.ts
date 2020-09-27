@@ -30,9 +30,7 @@ export async function createTables(db: DB) {
         skin_color TEXT,
         url TEXT,
         edited TIMESTAMP,
-        created TIMESTAMP,
-        film_id INTEGER,
-        FOREIGN KEY (film_id) REFERENCES films(id)
+        created TIMESTAMP
       );
     `);
 
@@ -50,9 +48,7 @@ export async function createTables(db: DB) {
         terrain TEXT,
         url TEXT,
         edited TIMESTAMP,
-        created TIMESTAMP,
-        film_id INTEGER,
-        FOREIGN KEY (film_id) REFERENCES films(id)
+        created TIMESTAMP
       );
     `);
 
@@ -71,9 +67,7 @@ export async function createTables(db: DB) {
         skin_colors TEXT,
         url TEXT,
         edited TIMESTAMP,
-        created TIMESTAMP,
-        film_id INTEGER,
-        FOREIGN KEY (film_id) REFERENCES films(id)
+        created TIMESTAMP
       );
     `);
 
@@ -95,9 +89,7 @@ export async function createTables(db: DB) {
         name TEXT,
         passengers TEXT,
         starship_class TEXT,
-        url TEXT,
-        film_id INTEGER, 
-        FOREIGN KEY (film_id) REFERENCES films(id)
+        url TEXT 
       );
     `);
 
@@ -117,9 +109,7 @@ export async function createTables(db: DB) {
         name TEXT, 
         passengers TEXT, 
         url TEXT, 
-        vehicle_class TEXT,
-        film_id INTEGER, 
-        FOREIGN KEY (film_id) REFERENCES films(id)
+        vehicle_class TEXT 
       );
     `);
 
@@ -175,8 +165,8 @@ export async function createRelationsTables(db: DB) {
      */
   await db.query(`/* SQL */
       CREATE TABLE IF NOT EXISTS speciesPeople (
-        characterId INTEGER, 
-        specieId INTEGER
+        specieId INTEGER,
+        characterId INTEGER 
       );
     `);
 
