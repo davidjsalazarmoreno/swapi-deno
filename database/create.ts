@@ -123,8 +123,8 @@ export async function createTables(db: DB) {
 
 export async function createRelationsTables(db: DB) {
   /**
-     * Films relations
-     */
+   * Films relations
+   */
   await db.query(`/* SQL */
       CREATE TABLE IF NOT EXISTS filmStarships (
         filmId INTEGER,
@@ -179,4 +179,11 @@ export async function createRelationsTables(db: DB) {
         characterId INTEGER
       );
     `);
+
+  await db.query(`/* SQL */
+    CREATE TABLE IF NOT EXISTS vehiclePilots (
+      vehicleId INTEGER, 
+      characterId INTEGER
+    );
+  `);
 }

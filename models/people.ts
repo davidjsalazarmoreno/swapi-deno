@@ -1,12 +1,10 @@
 import { db } from "../database/db.ts";
 
 export class People {
-  static table = "people";
-
   public getAll() {
     return db.query(`/* SQL */
      SELECT DISTINCT
-        pl.id, 
+        pl.id url, 
         pl.birth_year,
         pl.eye_color,
         pl.gender,
@@ -27,7 +25,10 @@ export class People {
         ) species,
         GROUP_CONCAT(
           DISTINCT stpl.starshipId 
-        ) starthips
+        ) starthips,
+        GROUP_CONCAT(
+          DISTINCT vhpls.vehicleId
+        ) vehicles
       FROM 
         people pl
       LEFT JOIN 
@@ -46,6 +47,10 @@ export class People {
         starshipPilots stpl
       ON
         pl.id = stpl.characterId
+      LEFT JOIN 
+        vehiclePilots vhpls
+      ON
+        vhpls.characterId = pl.id
       GROUP BY
         pl.id
       ORDER BY

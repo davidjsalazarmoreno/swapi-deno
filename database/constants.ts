@@ -12,4 +12,5 @@ export const relationsMapping: { [key: string]: string[] } = {
   species: ["people"],
   starship: ["pilots"],
   film: ["starships", "vehicles", "planets", "characters", "species"],
+  vehicle: ["pilots"],
 };
