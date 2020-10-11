@@ -9,6 +9,11 @@ import {
 } from "./utils.ts";
 import { Mapping } from "./db.ts";
 
+/**
+ * Populate tables, except for the column names
+ * specified in the keyToIgnore
+ * 
+ */
 export async function populateTables(
   db: DB,
   tableNames: { [key: string]: string },
@@ -39,11 +44,12 @@ export async function populateRelations(db: DB, mapping: Mapping) {
   );
 
   queries.forEach(async (data) => {
-    const [relationTable, pk, ...values] = data;
-    if (values.length === 0) {
+    const [relationTable, pk, ...rawValues] = data;
+    if (rawValues.length === 0) {
       return;
     }
-    const relationsValue = values.map((value) => {
+
+    const values = rawValues.map((value) => {
       return `
             (
               ${pk}, ${value}
@@ -51,7 +57,7 @@ export async function populateRelations(db: DB, mapping: Mapping) {
         `;
     });
     const query = `/* SQL */
-        INSERT INTO ${relationTable} VALUES ${relationsValue};
+        INSERT INTO ${relationTable} VALUES ${values};
       `;
 
     await db.query(query);
