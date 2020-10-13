@@ -9,7 +9,8 @@
     "start": "deno run --allow-net --allow-read --allow-write server.ts",
     "create:db": "rm database.sqlite; deno run --allow-net --allow-read --allow-write prepare-database.ts",
     "watch": "denon run --allow-net --allow-read --allow-write server.ts",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "test": "deno test controllers/ database/ models/ --allow-read --allow-write"
   },
   "devDependencies": {
     "cypress": "^5.1.0",
