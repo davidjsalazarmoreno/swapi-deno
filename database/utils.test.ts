@@ -47,5 +47,5 @@ Deno.test("should escape string values and return null for invalid values", () =
 Deno.test("should filter the fixtures to get only those with relation properties ", () => {
   const filtered = fixtures.filter(onlyRelations(relationsMapping));
 
-  assertEquals(79, filtered.length);
+  assertEquals(118, filtered.length);
 });
