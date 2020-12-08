@@ -1,5 +1,5 @@
 import { db } from "../database/db.ts";
-import { people } from "../database/fixtures/people.ts";
+import BaseModel from "./base.model.ts";
 
 export interface Person {
   birth_year: string;
@@ -20,44 +20,23 @@ export interface Person {
   created: string;
 }
 
-export class People {
-  // TODO: move to model utils
-  // TODO: Pass prefix as parameter
-  static toArray(field: string | null) {
-    console.log(field);
-    if (field == null || typeof field !== "string") {
-      return [];
-    }
-
-    if (field.length === 0) {
-      return [];
-    }
-
-    return field.split(",").map((id) => {
-      return `/api/people/${id.trim()}`;
-    });
-  }
-
+export class People extends BaseModel {
   static toViewModel(person: any): Person {
     if (person.homeworld) {
       person.homeworld = `/api/planets/${person.homeworld}`;
     }
 
-    person.films = People.toArray(person.films);
-
-    person.species = People.toArray(person.species);
-
-    person.vehicles = People.toArray(person.vehicles);
-
-    person.starships = People.toArray(person.starships);
-
+    person.films = People.toArray(person.films, "films");
+    person.species = People.toArray(person.species, "species");
+    person.vehicles = People.toArray(person.vehicles, "vehicles");
+    person.starships = People.toArray(person.starships, "starships");
     person.url = `/api/people/${person.url}`;
 
     return person as Person;
   }
 
   private getBaseQuery(id = -1) {
-    const byId = `WHERE pl.id = ${id}`;
+    const byId = `/* SQL */WHERE pl.id = ${id}`;
 
     return `/* SQL */
       SELECT DISTINCT
