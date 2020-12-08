@@ -1,43 +1,30 @@
 import { db } from "../database/db.ts";
+import BaseModel from "./base.model.ts";
 
 export interface Film {
-  id: string;
-  director: string;
-  episode_id: string;
-  opening_crawl: string;
-  producer: string;
-  release_date: string;
-  title: string;
-  url: string;
-  edited: string;
-  created: string;
+  id: string | null;
+  director: string | null;
+  episode_id: string | null;
+  opening_crawl: string | null;
+  producer: string | null;
+  release_date: string | null;
+  title: string | null;
+  url: string | null;
+  edited: string | null;
+  created: string | null;
+  characters: string | null;
+  planets: string | null;
 }
 
-export class Films {
-  // TODO: move to model utils
-  // TODO: Pass prefix as parameter
-  static toArray(field: string | null) {
-    if (field == null || typeof field !== "string") {
-      return [];
-    }
-
-    if (field.length === 0) {
-      return [];
-    }
-
-    return field.split(",").map((id) => {
-      return `/api/films/${id.trim()}`;
-    });
-  }
-
+export class Films extends BaseModel {
   static toViewModel(film: any): Film {
     // if (film.homeworld) {
     //   film.homeworld = `/api/planets/${film.homeworld}`;
     // }
 
-    // film.films = Films.toArray(film.films);
+    film.characters = Films.toArray(film.characters, "people");
 
-    // film.species = Films.toArray(film.species);
+    film.planets = Films.toArray(film.planets, "planets");
 
     // film.vehicles = Films.toArray(film.vehicles);
 
@@ -61,9 +48,28 @@ export class Films {
         release_date,
         title,
         edited,
-        created
-       FROM 
-        films;
+        created,
+        GROUP_CONCAT(
+          DISTINCT fc.characterId
+        ) characters,
+        GROUP_CONCAT(
+          DISTINCT fp.planetId
+        ) planets
+      FROM 
+        films f
+      LEFT JOIN
+        filmCharacters fc
+      ON
+        f.id = fc.filmId
+      LEFT JOIN
+        filmPlanets fp
+      ON
+        f.id = fp.filmId
+      GROUP BY
+        f.id
+      ORDER BY
+        f.id
+      ;
     `;
   }
 
