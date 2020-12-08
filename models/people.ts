@@ -10,8 +10,8 @@ export interface Person {
   homeworld: string;
   films: string | null;
   species: string | null;
-  vehicles: null;
-  starships: null;
+  vehicles: string | null;
+  starships: string | null;
   mass: string;
   name: string;
   skin_color: string;
