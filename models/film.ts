@@ -14,29 +14,25 @@ export interface Film {
   created: string | null;
   characters: string | null;
   planets: string | null;
+  startships: string | null;
+  vehicles: string | null;
+  species: string | null;
 }
 
 export class Films extends BaseModel {
   static toViewModel(film: any): Film {
-    // if (film.homeworld) {
-    //   film.homeworld = `/api/planets/${film.homeworld}`;
-    // }
-
     film.characters = Films.toArray(film.characters, "people");
-
     film.planets = Films.toArray(film.planets, "planets");
-
-    // film.vehicles = Films.toArray(film.vehicles);
-
-    // film.starships = Films.toArray(film.starships);
-
+    film.starships = Films.toArray(film.starships, "starships");
+    film.vehicles = Films.toArray(film.vehicles, "vehicles");
+    film.species = Films.toArray(film.species, "species");
     film.url = `/api/films/${film.url}`;
 
     return film as Film;
   }
 
   private getBaseQuery(id = -1) {
-    const byId = `WHERE pl.id = ${id}`;
+    const byId = `/* SQL */WHERE f.id = ${id}`;
 
     return `/* SQL */
       SELECT 
@@ -54,7 +50,17 @@ export class Films extends BaseModel {
         ) characters,
         GROUP_CONCAT(
           DISTINCT fp.planetId
-        ) planets
+        ) planets,
+        GROUP_CONCAT(
+          DISTINCT fs.starshipId
+        ) starships,
+        GROUP_CONCAT(
+          DISTINCT fv.vehicleId
+        ) vehicles,
+        /**TODO: Rename to fss.specieId */
+        GROUP_CONCAT(
+          DISTINCT fss.speciesId
+        ) species
       FROM 
         films f
       LEFT JOIN
@@ -65,6 +71,19 @@ export class Films extends BaseModel {
         filmPlanets fp
       ON
         f.id = fp.filmId
+      LEFT JOIN
+        filmStarships fs
+      ON
+        f.id = fs.filmId
+      LEFT JOIN
+        filmVehicles fv
+      ON
+        f.id = fv.filmId      
+      LEFT JOIN
+        filmSpecies fss
+      ON
+        f.id = fss.filmId
+     ${id !== -1 ? byId : ""}
       GROUP BY
         f.id
       ORDER BY
