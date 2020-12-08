@@ -1,5 +1,5 @@
 import { RouterContext } from "../deps.ts";
-import { People, Person } from "../models/people.ts";
+import { People } from "../models/people.ts";
 
 const model = new People();
 
