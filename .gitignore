@@ -1,3 +1,4 @@
 .vscode
 database.sqlite
 node_modules
+examples
