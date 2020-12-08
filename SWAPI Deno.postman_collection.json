@@ -26,26 +26,6 @@
 			"response": []
 		},
 		{
-			"name": "People Copy",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8000/api/people",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"people"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "People By Id",
 			"request": {
 				"method": "GET",
@@ -67,6 +47,26 @@
 		},
 		{
 			"name": "Films",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/films",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Film by Id",
 			"request": {
 				"method": "GET",
 				"header": [],
