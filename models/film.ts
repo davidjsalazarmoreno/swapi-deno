@@ -1,6 +1,16 @@
 import { db } from "../database/db.ts";
 
 export interface Film {
+  id: string;
+  director: string;
+  episode_id: string;
+  opening_crawl: string;
+  producer: string;
+  release_date: string;
+  title: string;
+  url: string;
+  edited: string;
+  created: string;
 }
 
 export class Films {
@@ -35,22 +45,21 @@ export class Films {
 
     film.url = `/api/films/${film.url}`;
 
-    return film as Films;
+    return film as Film;
   }
 
   private getBaseQuery(id = -1) {
     const byId = `WHERE pl.id = ${id}`;
 
     return `/* SQL */
-        SELECT 
-        id,
+      SELECT 
+        id AS url,
         director,
         episode_id,
         opening_crawl,
         producer,
         release_date,
         title,
-        url,
         edited,
         created
        FROM 
