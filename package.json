@@ -6,11 +6,7 @@
   "author": "David Salazar <davidjsalazarmoreno@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "deno run --reload --allow-net --allow-read --allow-write server.ts",
-    "create:db": "rm database.sqlite; deno run --allow-net --allow-read --allow-write prepare-database.ts",
-    "watch": "denon run --allow-net --allow-read --allow-write server.ts",
-    "cypress:run": "cypress run",
-    "test": "deno test controllers/ database/ models/ --allow-read --allow-write"
+    "cypress:run": "cypress run"
   },
   "devDependencies": {
     "cypress": "^5.1.0",
