@@ -71,7 +71,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/films",
+					"raw": "http://localhost:8000/api/films/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -79,12 +79,53 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"films"
+						"films",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Starships",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/starships",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"starships"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Starships by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/starships/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"starships",
+						"9"
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
