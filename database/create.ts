@@ -71,6 +71,7 @@ export async function createTables(db: DB) {
       );
     `);
 
+  // TODO: Remove unused fields
   await db.query(`/* SQL */
       CREATE TABLE IF NOT EXISTS starships (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 

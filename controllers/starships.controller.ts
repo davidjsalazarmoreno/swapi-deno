@@ -3,7 +3,7 @@ import { Starships } from "../models/starship.ts";
 
 const model = new Starships();
 
-export class startshipsController {
+export class StartshipsController {
   async all(ctx: RouterContext) {
     const startships = await model.getAll();
     if (startships.length) {
@@ -29,9 +29,9 @@ export class startshipsController {
     if (Object.keys(startships).length) {
       ctx.response.body = startships;
     } else {
-      ctx.response.body = "startships not found";
+      ctx.response.body = "Startship not found";
     }
   }
 }
 
-export default new startshipsController();
+export default new StartshipsController();

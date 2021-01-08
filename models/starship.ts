@@ -1,97 +1,88 @@
 import { db } from "../database/db.ts";
 import BaseModel from "./base.model.ts";
 
+const Nothing: { tag: "Nothing" } = { tag: "Nothing" };
+type Nothing = typeof Nothing;
+type Maybe<T> = T | Nothing;
+
 export interface Starship {
-  birth_year: string;
-  eye_color: string;
-  gender: string;
-  hair_color: string;
-  height: string;
-  homeworld: string;
-  films: string | null;
-  species: string | null;
-  vehicles: string | null;
-  starships: string | null;
-  mass: string;
-  name: string;
-  skin_color: string;
-  url: number;
-  edited: string;
-  created: string;
+  MGLT: string | null;
+  cargo_capacity: string | null;
+  consumables: string | null;
+  cost_in_credits: string | null;
+  // TODO: add edited and created
+  created: string | null;
+  crew: 342953;
+  edited: string | null;
+  hyperdrive_rating: string | null;
+  length: string | null;
+  manufacturer: string | null;
+  max_atmosphering_speed: string | null;
+  model: string | null;
+  name: string | null;
+  passengers: string | null;
+  films: string[] | null;
+  pilots: string[] | null;
+  starship_class: string | null;
+  url: string | null;
 }
 
 export class Starships extends BaseModel {
-  static toViewModel(starship: any): Starship {
-    if (starship.homeworld) {
-      starship.homeworld = `/api/planets/${starship.homeworld}`;
-    }
-
+  // TODO: Maybe?
+  static toViewModel(starship: Starship | any): Starship {
     starship.films = Starships.toArray(starship.films, "films");
-    starship.species = Starships.toArray(starship.species, "species");
-    starship.vehicles = Starships.toArray(starship.vehicles, "vehicles");
-    starship.starships = Starships.toArray(starship.starships, "starships");
-    starship.url = `/api/Starships/${starship.url}`;
+    starship.pilots = Starships.toArray(starship.pilots, "pilots");
+    starship.url = `/api/starships/${starship.url}`;
 
     return starship as Starship;
   }
 
   private getBaseQuery(id = -1) {
-    const byId = `/* SQL */WHERE pl.id = ${id}`;
+    const byId = `/* SQL */WHERE ss.id = ${id}`;
 
     return `/* SQL */
       SELECT DISTINCT
-        pl.birth_year,
-        pl.eye_color,
-        pl.gender,
-        pl.hair_color,
-        pl.height,
-        pl.homeworld,
+        MGLT,
+        starship_class,
+        hyperdrive_rating,
+        tp.consumables,
+        tp.name,
+        tp.created,
+        tp.cargo_capacity,
+        tp.passengers,
+        tp.max_atmosphering_speed,
+        tp.crew,
+        tp.length,
+        tp.model,
+        tp.cost_in_credits,
+        tp.manufacturer,
         GROUP_CONCAT(
-          DISTINCT fc.filmId 
+          DISTINCT sp.characterId
+        ) pilots,
+        GROUP_CONCAT(
+          DISTINCT fs.filmId
         ) films,
-        GROUP_CONCAT(
-          DISTINCT sp.specieId 
-        ) species,
-        GROUP_CONCAT(
-          DISTINCT vhpls.vehicleId
-        ) vehicles,
-        GROUP_CONCAT(
-          DISTINCT stpl.starshipId 
-        ) starships,
-        pl.mass,
-        pl.name,
-        pl.skin_color,
-        pl.url,
-        pl.edited,
-        pl.created,
-        pl.id AS url
+        ss.id AS url
       FROM 
-        Starships pl
+        starships ss
       LEFT JOIN 
-        filmCharacters fc
-      ON 
-        fc.characterId = pl.id
-      LEFT JOIN 
-        speciesStarships sp
-      ON 
-        sp.characterId = pl.id
-      LEFT JOIN 
-        vehicles
+        transports tp
       ON
-        sp.characterId = pl.id
+        tp.id =  ss.id
       LEFT JOIN
-        starshipPilots stpl
+        starshipPilots sp
       ON
-        pl.id = stpl.characterId
-      LEFT JOIN 
-        vehiclePilots vhpls
+        sp.starshipId = ss.id
+      LEFT JOIN
+        filmStarships fs
       ON
-        vhpls.characterId = pl.id
+        ss.id = fs.starshipId
       ${id !== -1 ? byId : ""}
       GROUP BY
-        pl.id
+        ss.id
       ORDER BY
-        pl.id
+        ss.id
+      ;
    `;
   }
 

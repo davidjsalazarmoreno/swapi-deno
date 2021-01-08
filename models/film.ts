@@ -16,6 +16,7 @@ export interface Film {
   planets: string | null;
   startships: string | null;
   vehicles: string | null;
+  // TODO:set right type
   species: string | null;
 }
 
