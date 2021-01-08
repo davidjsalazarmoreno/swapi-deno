@@ -1,20 +1,17 @@
-import {
-  assertArrayContains,
-  assertEquals,
-} from "../deps.ts";
+import { assertArrayContains, assertEquals } from "../deps.ts";
 import { People } from "./people.ts";
 
 Deno.test("should transform an comma separated string into an array", () => {
   assertArrayContains(
     ["/api/people/1", "/api/people/2", "/api/people/3", "/api/people/4"],
-    People.toArray("1,2,3,4"),
+    People.toArray("1,2,3,4", "people"),
   );
 });
 
 Deno.test("should return an empty array for null values", () => {
   assertArrayContains(
     [],
-    People.toArray(null),
+    People.toArray(null, "test"),
   );
 });
 
@@ -28,19 +25,19 @@ Deno.test("should return person view model", () => {
       "height": "172",
       "homeworld": "/api/planets/1",
       "films": [
-        "/api/people/1",
-        "/api/people/2",
-        "/api/people/3",
-        "/api/people/6",
+        "/api/films/1",
+        "/api/films/2",
+        "/api/films/3",
+        "/api/films/6",
       ],
       "species": [],
       "vehicles": [
-        "/api/people/14",
-        "/api/people/30",
+        "/api/vehicles/14",
+        "/api/vehicles/30",
       ],
       "starships": [
-        "/api/people/12",
-        "/api/people/22",
+        "/api/starships/12",
+        "/api/starships/22",
       ],
       "mass": "77",
       "name": "Luke Skywalker",
