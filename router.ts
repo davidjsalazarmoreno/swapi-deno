@@ -2,12 +2,14 @@ import { Router } from "./deps.ts";
 import filmsController from "./controllers/films.controller.ts";
 import peopleController from "./controllers/people.controller.ts";
 import planetsController from "./controllers/planets.controller.ts";
+import rootController from "./controllers/root.controller.ts";
 import speciesController from "./controllers/species.controller.ts";
 import starshipsController from "./controllers/starships.controller.ts";
 import vehiclesController from "./controllers/vehicles.controller.ts";
 
 export const router = new Router();
 
+router.get("/api", rootController.all);
 router.get("/api/films", filmsController.all);
 router.get("/api/films/:id", filmsController.byId);
 router.get("/api/people", peopleController.all);
