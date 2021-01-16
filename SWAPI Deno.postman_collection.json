@@ -112,7 +112,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/starships/9",
+					"raw": "http://localhost:8000/api/starships/6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -121,7 +121,48 @@
 					"path": [
 						"api",
 						"starships",
-						"9"
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Planets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/planets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Planets by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/planets/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"planets",
+						"7"
 					]
 				}
 			},
