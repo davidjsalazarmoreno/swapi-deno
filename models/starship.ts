@@ -30,11 +30,15 @@ export interface Starship {
 export class Starships extends BaseModel {
   // TODO: Maybe?
   static toViewModel(starship: Starship | any): Starship {
-    starship.films = Starships.toArray(starship.films, "films");
-    starship.pilots = Starships.toArray(starship.pilots, "pilots");
-    starship.url = `/api/starships/${starship.url}`;
+    if (starship) {
+      starship.films = Starships.toArray(starship.films, "films");
+      starship.pilots = Starships.toArray(starship.pilots, "pilots");
+      starship.url = `/api/starships/${starship.url}`;
 
-    return starship as Starship;
+      return starship as Starship;
+    } else {
+      return {} as Starship;
+    }
   }
 
   private getBaseQuery(id = -1) {
