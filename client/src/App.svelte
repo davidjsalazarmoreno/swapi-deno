@@ -17,6 +17,10 @@
   };
 </script>
 
+<main class="h-full">
+  <Router {routes} />
+</main>
+
 <style global lang="postcss">
   /* only apply purgecss on utilities, per Tailwind docs */
   /* purgecss start ignore */
@@ -26,7 +30,3 @@
 
   @tailwind utilities;
 </style>
-
-<body>
-  <Router {routes} />
-</body>
