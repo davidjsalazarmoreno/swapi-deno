@@ -17,7 +17,7 @@
   };
 </script>
 
-<main class="h-full">
+<main class="h-full bg-black text-gray-400">
   <Router {routes} />
 </main>
 

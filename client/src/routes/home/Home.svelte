@@ -16,9 +16,9 @@
   }
 </script>
 
-<header class="p-5">
+<header class="p-5 bg-black">
   <nav class="flex place-content-between">
-    <h1>SWAPI Clone</h1>
+    <h1 class="text-yellow-300 font-bold">SWAPI Clone</h1>
     <ol class="flex space-x-4">
       <li class="crumb"><a href="/">Home</a></li>
       <li class="crumb"><a href="#">Article</a></li>
@@ -29,11 +29,11 @@
 <!-- ./Header -->
 
 <section
-  class="sm:p-5 flex flex-col items-center h-2/5 sm:h-3/5 justify-center"
+  class="sm:p-5 flex flex-col items-center h-2/5 sm:h-3/5 justify-center myGray"
 >
-  <h2 class="text-5xl font-bold m-5">Try it now!</h2>
+  <h2 class="text-5xl font-bold m-5 text-yellow-300">Try it now!</h2>
 
-  <div class="flex">
+  <div class="flex m-5">
     <select id="apis" bind:value={resource} class="w-2/5 sm:w-2/5">
       <option>{prefix}people/</option>
       <option>{prefix}films/</option>
@@ -66,7 +66,7 @@
     <h2 class="text-5xl font-bold m-5">Result:</h2>
     <pre
       class="overflow-y-scroll w-11/12">
-        <code data-language="json">
+        <code class="json">
           {json}
         </code>
     </pre>
@@ -126,3 +126,9 @@
       data-show-count="false">Follow @davidjsmoreno</a
     > -->
 </footer>
+
+<style>
+  .myGray {
+    background-color: #272b30;
+  }
+</style>
