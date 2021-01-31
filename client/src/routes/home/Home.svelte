@@ -11,7 +11,7 @@
     fetch(`${api}${uri}`)
       .then((r) => r.json())
       .then((data) => {
-        json = JSON.stringify(data, null, 2);
+        json = JSON.stringify(data, null, 4);
       });
   }
 </script>
@@ -28,12 +28,13 @@
 </header>
 <!-- ./Header -->
 
-<section class="p-5 h-2/3">
-  <h2>Try it now!</h2>
+<section
+  class="sm:p-5 flex flex-col items-center h-2/5 sm:h-3/5 justify-center"
+>
+  <h2 class="text-5xl font-bold m-5">Try it now!</h2>
 
-  <div>
-    <span />
-    <select id="apis" bind:value={resource}>
+  <div class="flex">
+    <select id="apis" bind:value={resource} class="w-2/5 sm:w-2/5">
       <option>{prefix}people/</option>
       <option>{prefix}films/</option>
       <option>{prefix}starships/</option>
@@ -46,27 +47,35 @@
       type="text"
       placeholder="Resource id, like 1 or 10"
       bind:value={id}
+      class="w-15 sm:w-full"
     />
 
-    <small> Need a hint? try people/1/ or planets/3/ or starships/9/ </small>
-
-    <button disabled={!id | !resource} on:click={handleGet(resource + id)}>
-      Request
-    </button>
+    <button
+      disabled={!id | !resource}
+      on:click={handleGet(resource + id)}
+      class="w-15"> Request </button>
   </div>
 
-  {#if json}
-    <div>
-      Result:
-      <pre>
-      {json}
-    </pre>
-    </div>
-  {/if}
+  <small class="m-5">
+    Need a hint? try people/1/ or planets/3/ or starships/9/
+  </small>
 </section>
 
+{#if json}
+  <section class="sm:p-5 flex flex-col justify-center items-center">
+    <h2 class="text-5xl font-bold m-5">Result:</h2>
+    <pre
+      class="overflow-y-scroll w-11/12">
+        <code data-language="json">
+          {json}
+        </code>
+    </pre>
+  </section>
+{/if}
+<!-- ./JSON viewer -->
+
 <section
-  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 h-1/3 justify-center"
+  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 justify-center"
 >
   <div>
     <h2 class="text-center font-bold mb-5">What is this?</h2>
