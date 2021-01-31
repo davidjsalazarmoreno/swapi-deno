@@ -11,7 +11,6 @@
     fetch(`${api}${uri}`)
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         json = JSON.stringify(data, null, 2);
       });
   }
@@ -48,6 +47,8 @@
       placeholder="Resource id, like 1 or 10"
       bind:value={id}
     />
+
+    <small> Need a hint? try people/1/ or planets/3/ or starships/9/ </small>
 
     <button disabled={!id | !resource} on:click={handleGet(resource + id)}>
       Request
