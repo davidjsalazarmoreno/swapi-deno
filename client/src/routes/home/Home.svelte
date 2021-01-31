@@ -62,7 +62,7 @@
 </section>
 
 {#if json}
-  <section class="sm:p-5 flex flex-col justify-center items-center">
+  <section class="sm:p-5 flex flex-col justify-center items-center bg-black">
     <h2 class="text-5xl font-bold m-5">Result:</h2>
     <pre
       class="overflow-y-scroll w-11/12">
@@ -75,7 +75,7 @@
 <!-- ./JSON viewer -->
 
 <section
-  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 justify-center"
+  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 bg-black sm:h-3/5 justify-center items-center"
 >
   <div>
     <h2 class="text-center font-bold mb-5">What is this?</h2>
@@ -106,7 +106,7 @@
 </section>
 <!-- ./Three questions -->
 
-<footer class="p-5">
+<footer class="p-5 bg-black">
   <p>
     Created by David Salazar inspired on
     <a href="https://swapi.dev/"> https://swapi.dev/ </a>
