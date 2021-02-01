@@ -1,22 +1,29 @@
 <script>
+  import { onMount } from "svelte";
+
   import { link } from "svelte-spa-router";
-  // const routes = ["/api/people"];
   let prefix = "/api/";
   let json;
-  let resource;
-  let id;
+  let resource = prefix + "people/";
+  let id = 5;
 
-  function handleGet(uri) {
+  function getResource(uri) {
     const api = "http://localhost:8000";
-    fetch(`${api}${uri}`)
+    return fetch(`${api}${uri}`)
       .then((r) => r.json())
-      .then((data) => {
-        json = JSON.stringify(data, null, 4);
-      });
+      .then((data) => JSON.stringify(data, null, 4));
   }
+
+  async function onResourceRequest(uri) {
+    json = await getResource(uri);
+  }
+
+  onMount(async () => {
+    json = await getResource(resource + id);
+  });
 </script>
 
-<header class="p-5 bg-black">
+<header class="p-5 bg-gray-700">
   <nav class="flex place-content-between">
     <h1 class="text-yellow-300 font-bold">SWAPI Clone</h1>
     <ol class="flex space-x-4">
@@ -29,7 +36,7 @@
 <!-- ./Header -->
 
 <section
-  class="sm:p-5 flex flex-col items-center h-2/5 sm:h-3/5 justify-center myGray"
+  class="sm:p-5 flex flex-col items-center h-2/5 sm:h-3/5 justify-center bg-gray-900"
 >
   <h2 class="text-5xl font-bold m-5 text-yellow-300">Try it now!</h2>
 
@@ -52,17 +59,21 @@
 
     <button
       disabled={!id | !resource}
-      on:click={handleGet(resource + id)}
-      class="w-15"> Request </button>
+      on:click={onResourceRequest(resource + id)}
+      class="w-15"
+    >
+      Request
+    </button>
   </div>
 
   <small class="m-5">
     Need a hint? try people/1/ or planets/3/ or starships/9/
   </small>
 </section>
+<!-- ./Request input -->
 
 {#if json}
-  <section class="sm:p-5 flex flex-col justify-center items-center bg-black">
+  <section class="sm:p-5 flex flex-col justify-center items-center bg-gray-700">
     <h2 class="text-5xl font-bold m-5">Result:</h2>
     <pre
       class="overflow-y-scroll w-11/12">
@@ -75,7 +86,7 @@
 <!-- ./JSON viewer -->
 
 <section
-  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 bg-black sm:h-3/5 justify-center items-center"
+  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 bg-gray-700 sm:h-3/5 justify-center items-center"
 >
   <div>
     <h2 class="text-center font-bold mb-5">What is this?</h2>
@@ -106,7 +117,7 @@
 </section>
 <!-- ./Three questions -->
 
-<footer class="p-5 bg-black">
+<footer class="p-5 bg-gray-700">
   <p>
     Created by David Salazar inspired on
     <a href="https://swapi.dev/"> https://swapi.dev/ </a>
@@ -126,9 +137,3 @@
       data-show-count="false">Follow @davidjsmoreno</a
     > -->
 </footer>
-
-<style>
-  .myGray {
-    background-color: #272b30;
-  }
-</style>
