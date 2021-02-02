@@ -74,13 +74,17 @@
 
 {#if json}
   <section class="sm:p-5 flex flex-col justify-center items-center bg-gray-700">
-    <h2 class="text-5xl font-bold m-5">Result:</h2>
-    <pre
-      class="overflow-y-scroll w-11/12">
-        <code class="json">
+    <h2 class="text-5xl font-bold m-8">Result:</h2>
+    <div
+      class="overflow-y-scroll w-11/12 bg-gray-900 border-black border-2 p-7 rounded-xl"
+    >
+      <pre
+        class="bg-gray-100 text-gray-600 p-4 rounded-xl overflow-scroll">
+        <code class="json ">
           {json}
         </code>
-    </pre>
+      </pre>
+    </div>
   </section>
 {/if}
 <!-- ./JSON viewer -->
