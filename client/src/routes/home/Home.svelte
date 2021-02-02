@@ -24,23 +24,29 @@
   });
 </script>
 
-<header class="p-5 bg-gray-700">
+<header class="p-5 bg-primary-swapi bg-nav-bar">
   <nav class="flex place-content-between">
     <h1 class="text-yellow-300 font-bold">SWAPI Clone</h1>
-    <ol class="flex space-x-4">
-      <li class="crumb"><a href="/">Home</a></li>
-      <li class="crumb"><a href="#">Article</a></li>
-      <li class="crumb"><a href="#">About</a></li>
+    <ol class="flex space-x-4 divide-x">
+      <li>
+        <a class="text-gray-600 hover:text-gray-400" href="/">Home</a>
+      </li>
+      <li>
+        <a class="text-gray-600 hover:text-gray-400" href="#">Article</a>
+      </li>
+      <li>
+        <a class="text-gray-600 hover:text-gray-400" href="#">About</a>
+      </li>
     </ol>
   </nav>
 </header>
 <!-- ./Header -->
 
 <section
-  class="sm:p-5 flex flex-col items-center h-2/5 sm:h-3/5 justify-center bg-gray-900"
+  class="sm:p-5 mt-20 flex flex-col items-center h-2/5 sm:h-3/5 justify-center bg-secondary-swapi border-t-2 border-b-2 border-black"
 >
-  <h2 class="text-5xl font-bold m-5 text-yellow-300">Try it now!</h2>
-
+  <h2 class="text-6xl font-bold m-5 text-yellow-300">Try it now!</h2>
+  <h3 class="text-2xl m-5 text-yellow-300">The Star Wars API</h3>
   <div class="flex m-5">
     <select id="apis" bind:value={resource} class="w-2/5 sm:w-2/5">
       <option>{prefix}people/</option>
@@ -74,7 +80,9 @@
 <!-- ./Request input -->
 
 {#if json}
-  <section class="sm:p-5 flex flex-col justify-center items-center bg-gray-700">
+  <section
+    class="sm:p-5 flex flex-col justify-center items-center bg-primary-swapi"
+  >
     <h2 class="text-5xl font-bold m-8">Result:</h2>
     <div
       class="overflow-y-scroll w-11/12 bg-gray-900 border-black border-2 p-7 rounded-xl"
@@ -91,7 +99,7 @@
 <!-- ./JSON viewer -->
 
 <section
-  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 bg-gray-700 sm:h-3/5 justify-center items-center"
+  class="flex flex-col sm:flex-row p-5 space-x-4 space-y-4 sm:space-y-0 bg-primary-swapi sm:h-3/5 justify-center items-center"
 >
   <div>
     <h2 class="text-center font-bold mb-5">What is this?</h2>
@@ -122,7 +130,7 @@
 </section>
 <!-- ./Three questions -->
 
-<footer class="p-5 bg-gray-700">
+<footer class="p-5 bg-primary-swapi border-t-2 border-gray-900">
   <p>
     Created by David Salazar inspired on
     <a href="https://swapi.dev/"> https://swapi.dev/ </a>

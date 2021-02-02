@@ -17,7 +17,7 @@
   };
 </script>
 
-<main class="h-full bg-black text-gray-400">
+<main class="h-full bg-primary-swapi text-gray-400">
   <Router {routes} />
 </main>
 
