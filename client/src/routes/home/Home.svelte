@@ -27,7 +27,7 @@
 <header class="p-5 bg-primary-swapi bg-nav-bar">
   <nav class="flex place-content-between">
     <h1 class="text-yellow-300 font-bold">SWAPI Clone</h1>
-    <ol class="flex space-x-4 divide-x">
+    <ol class="flex space-x-4 divide-x divide-gray-100 divide-opacity-25">
       <li>
         <a class="text-gray-600 hover:text-gray-400" href="/">Home</a>
       </li>
@@ -48,7 +48,11 @@
   <h2 class="text-6xl font-bold m-5 text-yellow-300">Try it now!</h2>
   <h3 class="text-2xl m-5 text-yellow-300">The Star Wars API</h3>
   <div class="flex m-5">
-    <select id="apis" bind:value={resource} class="w-2/5 sm:w-2/5">
+    <select
+      id="apis"
+      bind:value={resource}
+      class="w-2/5 sm:w-2/5 bg-nav-bar p-3"
+    >
       <option>{prefix}people/</option>
       <option>{prefix}films/</option>
       <option>{prefix}starships/</option>
