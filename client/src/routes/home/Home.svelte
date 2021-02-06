@@ -47,11 +47,11 @@
 >
   <h2 class="text-6xl font-bold m-5 text-yellow-300">Try it now!</h2>
   <h3 class="text-2xl m-5 text-yellow-300">The Star Wars API</h3>
-  <div class="flex m-5">
+  <div class="flex m-5 w-8/12 sm:w-6/12">
     <select
       id="apis"
       bind:value={resource}
-      class="w-2/5 sm:w-2/5 bg-nav-bar p-3"
+      class="w-full sm:w-2/5 bg-nav-bar p-3 sm:p-5 border-transparent text-white"
     >
       <option>{prefix}people/</option>
       <option>{prefix}films/</option>
@@ -65,13 +65,13 @@
       type="text"
       placeholder="Resource id, like 1 or 10"
       bind:value={id}
-      class="w-15 sm:w-full"
+      class="w-15 sm:w-full border-transparent text-black"
     />
 
     <button
       disabled={!id | !resource}
       on:click={onResourceRequest(resource + id)}
-      class="w-15"
+      class="w-15 sm:w-1/4 text-white border-transparent bg-nav-bar"
     >
       Request
     </button>
