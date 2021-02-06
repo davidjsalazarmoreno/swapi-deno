@@ -27,15 +27,21 @@
 <header class="p-5 bg-primary-swapi bg-nav-bar">
   <nav class="flex place-content-between">
     <h1 class="text-yellow-300 font-bold">SWAPI Clone</h1>
-    <ol class="flex space-x-4 divide-x divide-gray-100 divide-opacity-25">
+    <ol class="flex space-x-4">
       <li>
-        <a class="text-gray-600 hover:text-gray-400" href="/">Home</a>
+        <a class="hover:text-gray-200 transition no-underline" href="/">
+          Home
+        </a>
       </li>
       <li>
-        <a class="text-gray-600 hover:text-gray-400" href="#">Article</a>
+        <a class="hover:text-gray-200 transition no-underline" href="#">
+          Article
+        </a>
       </li>
       <li>
-        <a class="text-gray-600 hover:text-gray-400" href="#">About</a>
+        <a class="hover:text-gray-200 transition no-underline" href="#">
+          About
+        </a>
       </li>
     </ol>
   </nav>
@@ -53,12 +59,12 @@
       bind:value={resource}
       class="w-full sm:w-2/5 bg-nav-bar p-3 sm:p-5 border-transparent text-white"
     >
-      <option>{prefix}people/</option>
-      <option>{prefix}films/</option>
-      <option>{prefix}starships/</option>
-      <option>{prefix}vehicles/</option>
-      <option>{prefix}species/</option>
-      <option>{prefix}planets/</option>
+      <option class="bg-secondary-swapi">{prefix}people/</option>
+      <option class="bg-secondary-swapi">{prefix}films/</option>
+      <option class="bg-secondary-swapi">{prefix}starships/</option>
+      <option class="bg-secondary-swapi">{prefix}vehicles/</option>
+      <option class="bg-secondary-swapi">{prefix}species/</option>
+      <option class="bg-secondary-swapi">{prefix}planets/</option>
     </select>
 
     <input
@@ -154,3 +160,9 @@
       data-show-count="false">Follow @davidjsmoreno</a
     > -->
 </footer>
+
+<style>
+  a {
+    color: rgba(159, 166, 178, var(--tw-text-opacity));
+  }
+</style>
