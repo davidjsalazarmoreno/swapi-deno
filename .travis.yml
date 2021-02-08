@@ -1,0 +1,16 @@
+language: default
+os: ubuntu
+services:
+    - docker
+branches:
+    only:
+    - master
+before_install:
+    - pwd
+    - curl -fsSL https://deno.land/x/install/install.sh | sh
+    - ls -l $HOME/.deno
+    - export DENO_INSTALL="$HOME/.deno"
+    - export PATH="$DENO_INSTALL/bin:$PATH"
+script: 
+    - cd ./server
+    - deno test controllers/ database/ models/ --allow-read --allow-write
