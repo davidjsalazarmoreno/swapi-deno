@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
 
-  import { link } from "svelte-spa-router";
   let prefix = "/api/";
   let json;
   let resource = prefix + "people/";
@@ -160,6 +159,7 @@
   </a>
 </footer>
 
+<!-- ./Three questions -->
 <style>
   a {
     color: rgba(159, 166, 178, var(--tw-text-opacity));
