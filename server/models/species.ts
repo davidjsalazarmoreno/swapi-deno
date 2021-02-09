@@ -37,8 +37,6 @@ export class Species extends BaseModel {
     }
   }
 
-  // TODO: revisar joins que sea los correctos
-  // TODO: rename to species
   private getBaseQuery(id = -1) {
     const byId = `/* SQL */WHERE sp.id = ${id}`;
 

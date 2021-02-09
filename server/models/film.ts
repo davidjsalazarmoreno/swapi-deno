@@ -12,12 +12,11 @@ export interface Film {
   url: string | null;
   edited: string | null;
   created: string | null;
-  characters: string | null;
-  planets: string | null;
-  startships: string | null;
-  vehicles: string | null;
-  // TODO:set right type
-  species: string | null;
+  characters: string[] | null;
+  planets: string[] | null;
+  startships: string[] | null;
+  vehicles: string[] | null;
+  species: string[] | null;
 }
 
 export class Films extends BaseModel {

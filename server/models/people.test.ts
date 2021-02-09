@@ -1,7 +1,6 @@
 import { assertArrayContains, assertEquals } from "../deps.ts";
 import { People } from "./people.ts";
 
-// TODO: Move it to base model?
 Deno.test("should transform an comma separated string into an array", () => {
   assertArrayContains(
     ["/api/people/1", "/api/people/2", "/api/people/3", "/api/people/4"],

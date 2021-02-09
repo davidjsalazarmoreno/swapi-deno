@@ -10,9 +10,8 @@ export interface Starship {
   cargo_capacity: string | null;
   consumables: string | null;
   cost_in_credits: string | null;
-  // TODO: add edited and created
   created: string | null;
-  crew: 342953;
+  crew: number | null;
   edited: string | null;
   hyperdrive_rating: string | null;
   length: string | null;
@@ -28,7 +27,6 @@ export interface Starship {
 }
 
 export class Starships extends BaseModel {
-  // TODO: Maybe?
   static toViewModel(starship: Starship | any): Starship {
     if (starship) {
       starship.films = Starships.toArray(starship.films, "films");

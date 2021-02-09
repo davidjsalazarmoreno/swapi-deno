@@ -21,7 +21,6 @@ export interface Vehicle {
 }
 
 export class Vehicles extends BaseModel {
-  // TODO: Maybe?
   static toViewModel(vehicle: Vehicle | any): Vehicle {
     if (vehicle) {
       vehicle.films = Vehicles.toArray(vehicle.films, "films");
