@@ -4,6 +4,8 @@
 
 # SWAPI Clone
 
+<img width="800"  src="./hero.png" />
+
 This a [SWAPI](https://swapi.dev/) (partial) clone using Deno, Svelte and Tailwind just because.
 
 Please read [the article(soon)](soon) if you want to know more about it.
