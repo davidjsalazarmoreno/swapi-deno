@@ -3,6 +3,14 @@
   export let resource;
   export let id;
   export let prefix;
+  const options = [
+    "people",
+    "films",
+    "starships",
+    "vehicles",
+    "species",
+    "planets",
+  ];
   const dispatch = createEventDispatcher();
 
   function request() {
@@ -23,12 +31,9 @@
       bind:value={resource}
       class="w-full sm:w-2/5 bg-nav-bar p-3 sm:p-5 border-transparent text-white"
     >
-      <option class="bg-secondary-swapi">{prefix}people/</option>
-      <option class="bg-secondary-swapi">{prefix}films/</option>
-      <option class="bg-secondary-swapi">{prefix}starships/</option>
-      <option class="bg-secondary-swapi">{prefix}vehicles/</option>
-      <option class="bg-secondary-swapi">{prefix}species/</option>
-      <option class="bg-secondary-swapi">{prefix}planets/</option>
+      {#each options as option}
+        <option class="bg-secondary-swapi">{prefix}{option}/</option>
+      {/each}
     </select>
 
     <input
