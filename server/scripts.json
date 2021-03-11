@@ -1,19 +1,18 @@
 {
-  "$schema": "https://deno.land/x/denon/schema.json",
+  "watch": false,
   "scripts": {
     "watch": {
-      "cmd": "denon run --allow-net --allow-read --allow-write server.ts",
+      "cmd": "deno run --allow-net --allow-read --allow-write server.ts",
       "desc": "Dev mode",
       "watch": true
     },
     "start": {
-      "cmd": "denon run --reload --allow-net --allow-read --allow-write server.ts",
+      "cmd": "deno run --reload --allow-net --allow-read --allow-write --lock=lock.json --lock-write server.ts",
       "desc": "Start server and reload deps"
     },    
     "create:db": {
-      "cmd": "denon run --allow-net --allow-read --allow-write prepare-database.ts",
-      "desc": "Create DB",
-      "watch": false
+      "cmd": "deno run --allow-net --allow-read --allow-write prepare-database.ts",
+      "desc": "Create DB"
     },  
     "test": {
       "cmd": "deno test controllers/ database/ models/ --allow-read --allow-write",
