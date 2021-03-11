@@ -2,17 +2,17 @@
   "watch": false,
   "scripts": {
     "watch": {
-      "cmd": "deno run --allow-net --allow-read --allow-write server.ts",
+      "cmd": "deno run --allow-read --allow-write --allow-net server.ts",
       "desc": "Dev mode",
       "watch": true
     },
     "start": {
-      "cmd": "deno run --reload --allow-net --allow-read --allow-write --lock=lock.json --lock-write server.ts",
-      "desc": "Start server and reload deps"
+      "cmd": "deno run --allow-read --allow-write --allow-net --lock=lock.json server.ts",
+      "desc": "Start server"
     },    
     "create:db": {
-      "cmd": "deno run --allow-net --allow-read --allow-write prepare-database.ts",
-      "desc": "Create DB"
+      "cmd": "deno run --reload --allow-net --allow-read --allow-write --lock=lock.json --lock-write prepare-database.ts",
+      "desc": "Create DB  and reload deps"
     },  
     "test": {
       "cmd": "deno test controllers/ database/ models/ --allow-read --allow-write",
